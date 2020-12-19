@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import math
+
 import idaapi
 import idc
 #import clipboard
@@ -82,14 +84,14 @@ class PatternGen_Plugin_t(idaapi.plugin_t):
         firstByte = self.formatByte(ea)
         hstr += self.formatByte(ea)
         hstr = hstr + self.formatByte(ea + 1) if (firstByte == "FF" or firstByte == "66" or firstByte == "67") else hstr
-        hstr = hstr + ((int)(endcount - len(hstr) / 2) * " ??") if endcount >= 2 else hstr
+        #print(math.ceil(endcount - len(hstr) / 2))
+        hstr = hstr + math.ceil(endcount - len(hstr) / 2) * " ??" if endcount >= 2 else hstr
         return hstr
 
     def extractCode(self):
         self.printAvd()
 
         start = idc.read_selection_start()
-
         end = idc.read_selection_end()
         codeSize = end - start
         ea = start
@@ -119,7 +121,7 @@ class PatternGen_Plugin_t(idaapi.plugin_t):
             if ea >= (start + codeSize):
                 break
         # print (idc.get_event_module_base() -  idc.SelStart());
-        print ("%s  Offset:0x%x" % (idc.get_func_name(idc.here()), idc.here() - idaapi.get_imagebase()))
+        print ("%s  Address:0x%x Offset:0x%x" % (idc.get_func_name(idc.here()),idc.here(), idc.here() - idaapi.get_imagebase()))
         # print result
         return result
 
