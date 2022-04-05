@@ -121,7 +121,7 @@ class PatternGen_Plugin_t(idaapi.plugin_t):
             if ea >= (start + codeSize):
                 break
         # print (idc.get_event_module_base() -  idc.SelStart());
-        print ("%s  Address:0x%x Offset:0x%x" % (idc.get_func_name(idc.here()),idc.here(), idc.here() - idaapi.get_imagebase()))
+        print ("%s  Address:0x%x Offset:0x%x" % (idc.get_func_off_str(idc.here()),idc.here(), idc.here() - idaapi.get_imagebase()))
         # print result
         return result
 
