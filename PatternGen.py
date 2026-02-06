@@ -43,9 +43,9 @@ try:
 
         @classmethod
         def update(self, ctx):
-            if ctx.form_type == idaapi.BWN_DISASM:
-                return idaapi.AST_ENABLE_FOR_FORM
-            return idaapi.AST_DISABLE_FOR_FORM
+            if ctx.widget_type == idaapi.BWN_DISASM:
+                return idaapi.AST_ENABLE_FOR_WIDGET
+            return idaapi.AST_DISABLE_FOR_WIDGET
 
 
     class Searcher(Kp_Menu_Context):
@@ -134,4 +134,4 @@ class PatternGen_Plugin_t(idaapi.plugin_t):
 
 # register IDA plugin
 def PLUGIN_ENTRY():
-    return PatternGen_Plugin_t();
+    return PatternGen_Plugin_t()
